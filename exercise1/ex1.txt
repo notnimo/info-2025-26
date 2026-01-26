@@ -1,0 +1,11 @@
+Esercitazione 1:
+
+ - Definire una classe Persona
+   - con un attributo pubblico di tipo intero, 'eta'
+   - con un attributo pubblico di tipo stringa, 'nome'
+   - con un attributo pubblico di tipo string, 'cognome'
+   - con un attributo pubblico di tipo int, 'altezza'
+   - con un costruttore che prende gli attributi come parametro, e li inizializza
+   - con un metodo pubblico 'stampa', che restituisce una rappresentazione di tutti gli attributi di una persona
+ - Definire una classe Main, che definisca il metodo main
+ - Nel metodo main, creare 4 studenti della classe

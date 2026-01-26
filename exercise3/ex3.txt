@@ -1,0 +1,38 @@
+Definire:
+
+ - una classe OggettoAerospaziale:
+ 
+   - con un attributo protected String numeroDiSerie
+   - con un attributo protected double peso
+   - con un costruttore, che inizializzi gli attributi ricevendoli come parametri
+   
+ - una sottoclasse Vettore, che estende OggettoAerospaziale:
+
+   - con un attributo protected int numeroDiPropulsori
+   - con un attributo protected int altezza
+   - che nel costruttore riceva ed inizializzi questi nuovi attributi, oltre a quelli ereditati
+
+ - una sottoclasse Satellite, che estende OggettoAerospaziale:
+ 
+   - con un attributo protected int pannelliSolari
+   - con un attributo protected int ruoteDiReazione
+   - che nel costruttore riceva ed inizializzi questi nuovi attributi, oltre a quelli ereditati
+
+ - una sottoclasse StazioneSpaziale, che estende OggettoAerospaziale:
+ 
+   - con un attributo protected int astronautiABordo, inizializzato a 0
+   - con un metodo pubblico (getter) getAstronautiABordo, che restituisca il numero di astronauti a bordo
+   - con un metodo pubblic (setter) setAstronautiABordo, che riceva e setti il numero di astrounati a bordo
+   - con un metodo pubblic (setter) setAstronautiABordo, che riceva un array di stringhe con i nomi degli astronauti;
+     l'attributo astronautiABordo è settato di conseguenza
+   - entrambi i metodi setter, dopo aver modificato l'attributo, stampano a video l'avvenuta modifica
+   
+ - tutte le classi definite sovrascrivono (override) il metodo toString(), rappresentando tutti gli attributi di classe (inclusi quelli ereditati);
+   si suggerisce l'utilizzo di super() per riutilizzare il metodo toString() di OggettoAerospaziale
+   
+ - una classe Main:
+ 
+   - che definisca il metodo main
+   - che dichiari e istanzi un oggetto di ciascuno dei tipi precedenti
+   - che stampi a video gli oggetti creati, con invocazione implicita del metodo toString()
+   - che sull'oggetto di tipo StazioneSpaziale, invochi il metodo getter e i due metodi setter

@@ -1,0 +1,24 @@
+Definire:
+
+ - una classe Animale:
+
+	- con un attributo "nome" (stringa) e un attributo "numeroDiGambe" (int), entrambi protected
+	- con un costruttore pubblico, che riceva come parametro ed inizializzi entrambi gli attributi
+	- un metodo pubblico "parla", che restituisca una stringa e non riceva parametri. Il metodo restituisce "Verso non definito"
+ 
+ - una classe Quadrupede, che estenda la classe Animale, che inizializzi il numero di gambe a 4
+ - una classe Gatto, che estenda la classe Quadrupede
+   
+    - che ridefinisca il metodo "parla", affinchè restituisca "Miao"
+
+ - una classe Cane, che estenda la classe Quadrupede
+
+    - che ridefinisca il metodo "parla", affinchè restituisca "Bau"
+
+ - una classe Main, con metodo main, che:
+ 
+    - costruisca un oggetto di tipo Animale, uno di tipo Quadrupede, uno di tipo Gatto e uno di tipo Cane
+	- su questi 4 oggetti, ne invochi il metodo parla
+	- aggiungere un metodo pubblico "faiParlare" in Animale, che invochi "parla"
+	- cosa succede se cambiamo la visibilità di "parla" in protected e private? (override e visibilità)
+	- cosa succede se aggiungiamo un metodo "parla" che però riceve un parametro booleano? (overload)
