@@ -1,3 +1,5 @@
+package exercise1;
+
 public class Main {
   public static void main(String[] args) {
     Persona person1 = new Persona(25, "John", "Doe", 180);

@@ -1,3 +1,5 @@
+package exercise1;
+
 public class Persona {
   public int age;
   public String name;
