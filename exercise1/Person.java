@@ -1,12 +1,12 @@
 package exercise1;
 
-public class Persona {
+public class Person {
   public int age;
   public String name;
   public String surname;
   public int height;
 
-  public Persona(int age, String name, String surname, int height) {
+  public Person(int age, String name, String surname, int height) {
     this.age = age;
     this.name = name;
     this.surname = surname;
