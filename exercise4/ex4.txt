@@ -1,0 +1,29 @@
+Esercitazione 4:
+
+ - Definire una classe base 'StrumentoMusicale':
+   - che abbia un attributo protected 'marca' di tipo String
+   - che riceva ed inizializzi l'attributo 'marca' nel costruttore
+ - Definire una classe 'Aerofono' che derivi da 'StrumentoMusicale'
+ - Definire una classe 'Cordofono' che derivi da 'StrumentoMusicale'
+ - Definire una classe 'Flauto' che derivi da 'Aerofono'
+ - Definire una classe 'FlautoTraverso' che derivi da 'Flauto'
+ - Definire una classe 'FlautoDritto' che derivi da 'Flauto'
+ - Definire una classe 'Pianoforte' che derivi da 'Cordofono'
+ - Definire una classe 'Violino' che derivi da 'Cordofono'
+ - Definire una classe Main, con metodo main
+   - che dichiari e crei un array di tipo 'StrumentoMusicale', di lunghezza 64
+   - che con un ciclo do-while chieda all'utente di inserire da tastiera un numero intero 'scelta'
+   - che, dentro al ciclo, dichiari una variabile di tipo 'StrumentoMusicale' chiamata 'strumento'
+   - se scelta vale 1, strumento deve essere istanziato come 'FlautoTraverso' (con marca a piacere)
+   - se scelta vale 2, strumento deve essere istanziato come 'FlautoDritto' (con marca a piacere)
+   - se scelta vale 3, strumento deve essere istanziato come 'Pianoforte' (con marca a piacere)
+   - se scelta vale 4, strumento deve essere istanziato come 'Violino' (con marca a piacere)
+   - se scelta vale 0, il ciclo do-while termina
+   - ad ogni iterazione, a prescindere dal tipo creato, si stampi a video lo strumento creato, e lo si inserisca nell'array 'strumenti'
+   - dopo il ciclo do-while:
+       - iterare tutti gli strumenti in 'strumenti', e stampare l'oggetto a video (con metodo toString implicito)
+       - dichiarare un oggetto di tipo 'FlautoTraverso'; può essere creato come 'FlautoDritto' ?
+       - dichiarare un oggetto di tipo 'Violino'; può essere creato come 'Cordofono' ?
+       - dichiarare e creare un oggetto di tipo 'Pianoforte'; castarlo e memorizzarlo in un generico 'StrumentoMusicale' chiamato 'strumentoBase'
+       - è possibile ricastare indietro 'strumentoBase' al tipo 'Pianoforte'?
+       - è possibile ricastare indietro 'strumentoBase' ad un altro tipo, ad esempio 'Violino'?
