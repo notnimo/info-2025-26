@@ -1,0 +1,52 @@
+Esercitazione 8:
+
+Definire:
+
+ - una classe FormaGeometrica:
+ 
+   - con un metodo pubblico, "disegna", che restituisca la stringa "Generica forma geometrica"
+
+ - una classe Poligono, che estende FormaGeometrica:
+ 
+   - con un attributo lati, di tipo array di float
+   - con un costruttore pubblico, che riceva come parametro l'array di lati   
+   - che ridefinisca il metodo "disegna", restituendo "Poligono"
+   - che definisca il metodo "getPerimetro", restituendo il perimetro del poligono
+
+ - una classe Quadrilatero, che estende Poligono:
+ 
+   - che nel costruttore riceva l'array di lati, e verifichi che la lunghezza dell'array sia 4; in
+     caso contrario, lanci eccezione
+   - che ridefinisca il metodo "disegna", restituendo "Quadrilatero"
+
+ - una classe Rettangolo, che estende Quadrilatero:
+ 
+   - che nel costruttore riceva l'array di lati, e verifichi che i lati siano uguali a coppie;
+     in caso contrario, lanci eccezione
+   - che ridefinisca il metodo "disegna", restituendo "Rettangolo"
+
+ - una classe Quadrato, che estende Quadrilatero:
+ 
+   - che nel costruttore riceva l'array di lati, e verifichi che i lati siano tutti uguali;
+     in caso contrario, lanci eccezione
+   - che ridefinisca il metodo "disegna", restituendo "Quadrato"
+
+ - una classe Triangolo, che estende Poligono:
+ 
+   - che nel costruttore riceva l'array di lati, e verifichi che i lati siano 3. Inoltre, nessuno dei
+     lati deve essere maggiore della somma degli altri due. Nei casi contrari, lanci eccezione.
+   - che ridefinisca il metodo "disegna", restituendo "Triangolo"
+
+ - una classe Cerchio, che estende FormaGeometrica:
+ 
+   - con un attributo protected "raggio", di tipo float
+   - che nel costruttore riceva il raggio, e inizializzi il proprio attributo di classe
+   - che definisca il metodo "getCirconferenza", che restituisce la circonferenza del cerchio
+   - che ridefinisca il metodo "disegna", restituendo "Cerchio"
+   
+ - una classe Main:
+ 
+   - che definisca il metodo main
+   - che dichiari e istanzi un oggetto di ciascuno dei tipi precedenti (inclusi FormaGeometrica e Poligono)
+   - che su ciascun oggetto creato stampi il risultato dei metodi definiti ("disegna", "getCirconferenza", ...)
+   - che dichiari e istanzi quadrilateri, rettangoli, triangoli e quadrati non validi, gestiti tramite statement di catch

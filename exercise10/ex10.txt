@@ -1,0 +1,22 @@
+Esercitazione 10:
+
+ - Creare una classe Gatto:
+   - con un attributo protetto di tipo Stringa denominato "microchip"
+   - con costruttore che riceva ed inizializzi l'attributo "microchip"
+   - che sovrascriva il metodo toString, restituendo il contenuto dell'attributo "microchip"
+   - che implementi l'interfaccia Comparable<Gatto>; è quindi necessario definire il metodo
+     pubblico compareTo, che restituisce un intero e riceve come parametro un oggetto di tipo Gatto.
+     Il metodo deve restituire il confronto tra il microchip dell'istanza e quello dell'oggetto passato come parametro.
+- Creare una classe Persona:
+   - con un attributo protetto di tipo Stringa denominato "cf"
+   - con costruttore che riceva ed inizializzi l'attributo "cf"
+   - che sovrascriva il metodo toString, restituendo il contenuto dell'attributo "cf"
+   - che implementi l'interfaccia Comparable<Persona>; è quindi necessario definire il metodo
+     pubblico compareTo, che restituisce un intero e riceve come parametro un oggetto di tipo Persona.
+     Il metodo deve restituire il confronto tra il codice fiscale dell'istanza e quello dell'oggetto passato come parametro.
+ - Nella classe Main:
+   - Definire e creare un array di tipo Gatto, di dimensione 2; inizializzare gli elementi con valori a scelta
+   - Definire e creare un array di tipo Persona, di dimensione 3; inizializzare gli elementi con valori a scelta
+   - Ordinare i due array grazie all'interfaccia Comparable, tramite il metodo Arrays.sort
+   - Stampare a video i due array, al fine di verificarne l'ordinamento
+   

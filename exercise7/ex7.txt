@@ -1,0 +1,26 @@
+Esercitazione 7:
+
+ - Definire una classe Aritmetica:
+ 
+   - con un metodo pubblico statico somma, che riceva due parametri interi e ne calcoli e restituisca
+     la somma come valore intero; se l'operazione causa Overflow, si lanci una ArithmeticException
+   - con un metodo pubblico statico sottrai, che riceva due parametri interi e ne calcoli e restituisca
+     la differenza come valore intero;
+   - con un metodo pubblico statico moltiplica, che riceva due parametri interi e ne calcoli e restituisca
+     il prodotto come valore intero;
+   - con un metodo pubblico statico dividi, che riceva due parametri interi e ne calcoli e restituisca
+     la divisione come valore intero;
+   - se ciascuna delle operazioni aritmetiche precedenti causa Overflow, si lanci una ArithmeticException
+     (Suggerimento: calcolare la somma in una variabile long, e verificare che il valore non sia
+     maggiore di Integer.MAX_VALUE o minore di Integer.MIN_VALUE)
+   - nel metodo dividi, se si riceve il parametro divisore pari a 0, si lanci una IllegalArgumentException
+
+ - In una classe Main:
+ 
+   - Invocare le 4 operazioni aritmetiche con parametri validi
+   - Invocare le operazioni aritmetiche di somma, sottrazione e moltiplicazione causando overflow,
+     e verificare l'occorrenza dell'eccezione a run-time
+   - Invocare l'operazione dividi con divisore pari a 0, e verificare l'occorrenza dell'eccezione dedicata
+   - Catturare ciascuna delle eccezioni precedentemente generate in uno statementi di try-catch
+   - In uno degli statement precedenti di try-catch, aggiungere la clausola finally, con una stampa a video
+     del messaggio "Statement di finally, eseguito sempre e comunque"

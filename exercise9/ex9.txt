@@ -1,0 +1,32 @@
+Esercitazione 9:
+
+ - Implementare le classi e le interfacce rappresentate in Esercitazione_9.PNG
+ - Il metodo speak di Animale restituisce "Not defined"
+ - La classe Cat sovrascrive il metodo speak e restituisce "Meow"
+ - La classe Dog sovrascrive il metodo speak e restituisce "Woof"
+ - Il metodo speak di Person restituisce <name>
+ - La classe Student sovrascrive il metodo speak e restituisce: "Hi, I'm <name> and I'm a student"
+ - La classe Professor sovrascrive il metodo speak e restituisce: "Hello there, I'm professor <name>"
+ - I metodi catchAFrisbee(), goClubbing() e doSomethingExtremelyBoring() sono vuoti
+ - Il metodo purr() restituisce "Purr purr purrrr"
+ - L'interfaccia Speaker definisce il metodo: String speak(); tutte le classi hanno già un metodo
+   corrispondente, e implementano quindi questa interfaccia
+ - L'interfaccia SomeoneThatKnowsHowToHaveFun definisce il metodo: void haveFun();
+ - L'interfaccia Printable definisce il metodo: String print();
+ - La classe Animal definisce il metodo String print(), che restituisce <name>; questo permette anche a Cat e Dog
+   di implementare l'interfaccia Printable
+ - La classe Person definisce il metodo String print(), che restituisce <name>; questo permette anche a Student
+   e Professor di implementare l'interfaccia Printable
+ - La classe Animal e Person aggiungono un metodo haveFun(), senza implementazione:
+    - Dog sovrascrive questo metodo, invocando catchAFrisbee()
+    - Cat sovrascrive questo metodo, invocando purr()
+    - Student sovrascrive questo metodo, invocando goClubbing()
+    - Professor sovrascrive questo metodo, invocando doSomethingExtremelyBoring()
+
+ - Dichiarare una classe Main con 4 metodi statici:
+    - il metodo void haveFun(SomeoneThatKnowsHaveToHaveFun obj); il metodo deve invocare haveFun() sul parametro obj
+    - il metodo void speak(Speaker obj); il metodo deve invocare speak() sul parametro obj, e stampare il risultato a video
+    - il metodo void print(Printable obj); il metodo deve invocare print() sul parametro obj, e stampare il risultato a video
+    - il metodo main, che:
+         - dichiara e crea un oggetto di tipo Cat, uno di tipo Dog, uno di tipo Student, ed uno di tipo Professor
+         - per ciascuna di queste istanze, invoca i metodi statici haveFun, print e speak della classe Main

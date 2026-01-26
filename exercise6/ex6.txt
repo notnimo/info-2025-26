@@ -1,0 +1,26 @@
+Esercitazione 6:
+
+ - Definire una classe Impiegato:
+ 
+   - con un attributo privato String 'nome'
+   - con un attributo privato String 'cognome'
+   - con un attributo privato int 'salario'
+   - con un costruttore pubblico che riceva ed inizializzi gli attributi nome e cognome;
+     l'attributo salario è inizializzato a 0
+   - con un costruttore pubblico che riceva ed inizializzi gli attributi nome, cognome e salario
+   - con un metodo pubblico getNome che restituisca il nome dell'impiegato
+   - con un metodo pubblico getCognome che restituisca il cognome dell'impiegato
+   - con ridefinisca il metodo toString, rappresentando nome e cognome dell'impiegato
+   - con un metodo protetto setSalario, che riceva ed imposti il salario
+ - Testare la classe definita (creazione e metodi) nel metodo main della classe Main
+ - Nella classe Impiegato definire ora un attributo statico e protetto di tipo intero, chiamato 'sommaDeiSalari'
+ - Ogni qual volta l'attributo 'salario' cambia valore, aggiornare 'sommaDeiSalari' di conseguenza
+   (Suggerimento: ogni modifica all'attributo 'salario' potrebbe essere centralizzata nel metodo setSalario)
+ - Nella classe Main, definire 3 impiegati, ognuno con salario diverso, alternando l'utilizzo dei costruttori disponibili
+ - Verificare che l'attributo 'sommaDeiSalari' sommi correttamente i salari di tutti gli impiegati, anche a fronte
+   di una modifica di salario su di uno di questi. Gli attributi statici si invocano come segue: Impiegato.sommaDeiSalari
+ - Definire ora un metodo statico protetto stampaSommaDeiSalari, che stampi l'attributo 'sommaDeiSalari':
+   - invocare il metodo dal main (Impiegato.stampaSommaDeiSalari())
+   - è possibile all'interno di questo metodo leggere o scrivere ad esempio l'attributo 'cognome'? Perchè?
+   - è possibile all'interno di questo metodo leggere o scrivere l'attributo 'sommaDeiSalari'? Perchè?
+ - Come mai, quindi, il metodo main è static?
