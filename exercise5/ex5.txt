@@ -1,0 +1,20 @@
+Esercitazione 5:
+
+ - Creare una classe Spaceship:
+   - con costruttore di default
+   - con un metodo pubblico shoot, di tipo void, che stampi a video "Phew pheew!!"
+ - Creare una classe RebelSpaceship che estende Spaceship:
+   - con costruttore di default
+   - che sovrascriva il metodo shoot, stampando a video "Phew pheew to the empire!!"
+ - Nella classe Main:
+   - Implementare un metodo statico printObject, che riceva come parametro un oggetto di tipo Spaceship,
+      e stampi a video "Spaceship is shooting, phew pheew!!"
+   - Implementare un metodo statico printObject, che riceva come parametro un oggetto di tipo RebelSpaceship,
+     e stampi a video "Rebel spaceship is shooting, phew pheew to the empire!!"
+   - Nel metodo main:
+       - dichiarare un oggetto di tipo Spaceship, chiamato starDestroyer, ed istanziarlo di tipo Spaceship
+       - dichiarare un oggetto di tipo Spaceship, chiamato xWing, ed istanziarlo di tipo RebelSpaceship
+       - invocare il metodo printObject, passando come parametro starDestroyer: cosa viene stampato a video e perchè?
+       - invocare il metodo printObject, passando come parametro xwing: cosa viene stampato a video e perchè?
+       - invocare starDestroyer.shoot(): cosa viene stampato a video e perchè?
+       - invocare xwing.shoot(): cosa viene stampato a video e perchè?
