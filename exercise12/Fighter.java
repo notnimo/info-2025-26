@@ -13,6 +13,26 @@ public abstract class Fighter {
     this.isEvil = isEvil;
   }
 
+  public void increaseExp() {
+    this.exp += 1;
+  }
+
+  public int getHealthPoints() {
+    return this.healthPoints;
+  }
+
+  public int getExp() {
+    return this.exp;
+  }
+
+  public int getAttack() {
+    return this.attack;
+  }
+
+  public int getDefense() {
+    return this.defense;
+  }
+
   public void inflictDamage(int damage) {
     this.healthPoints -= damage;
   }
@@ -27,21 +47,21 @@ public abstract class Fighter {
 
   public Fighter attack(Fighter opponent) throws GameException {
 
-    if(checkSide(opponent)) throw new GameException(null);  // update message
+    if(checkSide(opponent)) throw new GameException("two fighters of the same side cannot attack each other");
 
-    int damageReceived = this.attack * this.exp - opponent.defense + opponent.exp;
+    int damage = this.getAttack() * this.getExp() - opponent.getDefense() + opponent.getExp();
     
-    if(damageReceived > 0) {opponent.inflictDamage(damageReceived);}else {opponent.inflictDamage(0);}
+    if(damage > 0) {opponent.inflictDamage(damage);}else {opponent.inflictDamage(0);}
 
     if(opponent.isDead()) {
-      this.exp += 1;
-      return this;
-    } else if(this.isDead()) {
-      opponent.exp += 1;
+      this.increaseExp();
       return opponent;
+    } else if(this.isDead()) {
+      opponent.increaseExp();
+      return this;
     } else {
-      opponent.exp += 1;
-      this.exp += 1;
+      opponent.increaseExp();
+      this.increaseExp();
       return null;
     }
 
