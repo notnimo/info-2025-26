@@ -3,8 +3,8 @@ package chess.core;
 public class Board {
   public Tile[][] tiles;
 
-  static final int Rows = 8;
-  static final int Cols = 8;
+  public static final int Rows = 8;
+  public static final int Cols = 8;
   static final int LastRow = Rows - 1;
   static final int LastCol = Cols - 1;
 
