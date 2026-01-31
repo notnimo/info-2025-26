@@ -26,7 +26,22 @@ public class BoardPanel extends JPanel {
   private boolean moveInProgress;
 
   public void onMove(int row, int col) {
-    // Handle the move logic here
+    if(!(this.moveInProgress)){
+      if(game.isMoveSourceValid(row, col)){
+        this.moveInProgress = true;
+        highlightSourceTile(row, col, java.awt.Color.GREEN);
+        sourceRow = row;
+        sourceCol = col;
+      }
+    }else {
+      this.moveInProgress = false;
+      game.processMove(sourceRow, sourceCol, row, col);
+      highlightSourceTile(sourceRow, sourceCol, determineTileColor(sourceRow, sourceCol));
+    }
+  }
+
+  public void processMove(int sourceRow, int sourceCol, int targetRow, int targetCol){
+    
   }
 
   public BoardPanel(Game game) {
