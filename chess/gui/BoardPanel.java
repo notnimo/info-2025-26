@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import chess.core.Board;
 import chess.core.Game;
 import chess.core.PieceType;
+import chess.core.Piece;
 
 public class BoardPanel extends JPanel {
   static int TILE_SIZE = 100;
@@ -41,7 +42,12 @@ public class BoardPanel extends JPanel {
   }
 
   public void processMove(int sourceRow, int sourceCol, int targetRow, int targetCol){
-    
+    boolean moveSuccessful = game.processMove(sourceRow, sourceCol, targetRow, targetCol);
+    if(moveSuccessful){
+      Piece movedPiece = game.getBoard().getTile(targetRow, targetCol).getPiece();
+      this.clearPiece(sourceRow, sourceCol);
+      this.drawPiece(targetRow, targetCol, movedPiece.getType(), movedPiece.getColor());
+    }
   }
 
   public BoardPanel(Game game) {
