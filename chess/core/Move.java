@@ -6,7 +6,7 @@ public class Move {
   private int targetRow;
   private int targetCol;
 
-  private Board board;
+  public Board board;
 
   public Move(Board board, int sourceRow, int sourceCol, int targetRow, int targetCol) {
     this.board = board;
