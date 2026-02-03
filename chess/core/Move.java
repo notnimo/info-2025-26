@@ -48,28 +48,57 @@ public class Move {
     return this.getPiece(row, col) != null;
   }
 
-  public void wouldEndInKingCheck(){}
+  public void wouldEndInKingCheck() throws InvalidMoveException {
+    Piece sourcePiece = this.getPiece(this.sourceRow, this.sourceCol);
+    Piece targetPiece = this.getPiece(this.targetRow, this.targetCol);
+
+    this.setPiece(this.sourceRow, this.sourceCol, null);
+    this.setPiece(this.targetRow, this.targetCol, sourcePiece);
+
+    int kingRow = -1;
+    int kingCol = -1;
+
+    for(int row = 0; row < Board.Rows; row++){
+      for(int col = 0; col < Board.Cols; col++){
+        Piece piece = this.getPiece(row, col);
+        if(piece.getType() == PieceType.KING && piece.getColor() == sourcePiece.getColor()){
+          kingRow = row;
+          kingCol = col;
+        }
+      }
+    }
+
+    this.setPiece(this.sourceRow, this.sourceCol, sourcePiece);
+    this.setPiece(this.targetRow, this.targetCol, targetPiece);
+
+    boolean kingInCheck = this.isKingInCheck(kingRow, kingCol, sourcePiece.getColor());
+    if (kingInCheck) throw new InvalidMoveException("Move would put or leave king in check");
+  }
 
   public boolean isTargetOccupiedByAlly(){
     Piece sourcePiece = this.getPiece(this.sourceRow, this.sourceCol);
     Piece targetPiece = this.getPiece(this.targetRow, this.targetCol);
 
     if (targetPiece == null) return false;
-    return true;//sourcePiece.getColor() == targetPiece.getColor();
+    return sourcePiece.getColor() == targetPiece.getColor();
   }
 
   public boolean isKingInCheck(int kingRow, int kingCol, Color kingColor){
-    //for (int row = 0; row < 8; row++) {
-    //  for (int col = 0; col < 8; col++) {
-    //    Piece piece = this.getPiece(row, col);
-    //    if (piece != null && piece.getColor() != kingColor) {
-    //      Move potentialMove = new Move(this.board, row, col, kingRow, kingCol);
-    //      if (piece.isValidMove(potentialMove)) {
-    //        return true;
-    //      }
-    //    }
-    //  }
-    //}
+    Color opponentColor = (kingColor == Color.WHITE) ? Color.BLACK : Color.WHITE;
+
+    for (int row = 0; row < Board.Rows; row++) {
+      for (int col = 0; col < Board.Cols; col++) {
+        Piece piece = this.getPiece(row, col);
+        if (piece != null && opponentColor == kingColor) {
+          Move potentialMove = new Move(this.board, row, col, kingRow, kingCol);
+          try{
+            piece.validateMove(potentialMove);
+          }catch(InvalidMoveException e){
+            return true;
+          }
+        }
+      }
+    }
     return false;
   }
 

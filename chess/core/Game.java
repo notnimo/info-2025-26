@@ -17,7 +17,30 @@ public class Game {
   }
 
   private void setup(){
-    // Set up pieces
+    for(int row = 0; row < Board.Rows; row++){
+      if(row == 0 || row == Board.LastRow){
+        for(int col = 0; col < Board.Cols; col++){
+          if(col == 0 || col == Board.LastCol)
+            this.board.getTile(row, col).setPiece(new Piece(PieceType.ROOK, (row == 0 ? Color.WHITE : Color.BLACK)));
+
+          if(col == 1 || col == (Board.LastCol - 1))
+            this.board.getTile(row, col).setPiece(new Piece(PieceType.KNIGHT, (row == 0 ? Color.WHITE : Color.BLACK)));
+
+          if(col == 2 || col == (Board.LastCol - 2))
+            this.board.getTile(row, col).setPiece(new Piece(PieceType.BISHOP, (row == 0 ? Color.WHITE : Color.BLACK)));
+
+          if(col == 3) if(row == 0) this.board.getTile(row, col).setPiece(new Piece(PieceType.QUEEN, Color.BLACK));
+          else this.board.getTile(row, col).setPiece(new Piece(PieceType.KING, Color.WHITE));
+
+          if(col == 4) if(row == 0) this.board.getTile(row, col).setPiece(new Piece(PieceType.KING, Color.BLACK));
+          else this.board.getTile(row, col).setPiece(new Piece(PieceType.QUEEN, Color.WHITE));
+        }
+      }else if(row == 1 || row == (Board.LastRow - 1)){
+        for(int col = 0; col < Board.Cols; col++){
+          this.board.getTile(row, col).setPiece(new Piece(PieceType.PAWN, (row == 1 ? Color.BLACK : Color.WHITE)));
+        }
+      }
+    }
   }
 
   public void clearBoard(){
@@ -76,4 +99,4 @@ public class Game {
       return false;
     }
   }
-} 
+}

@@ -33,5 +33,21 @@ public class Pawn extends Piece {
       throw new InvalidMoveException("invalid pawn move");
     }
   }
+
+  private boolean tryDiagonalCapture(Move move) {
+    int colOffset = Math.abs(move.getSourceCol() - move.getTargetCol());
+    int rowOffset = Math.abs(move.getTargetRow() - move.getSourceRow());
+
+    if((colOffset != 1 || rowOffset != 1) || move.board.getTile(move.getTargetRow(), move.getTargetCol()).getPiece() == null) return false;
+
+    return true;
+  }
+
+  @Override
+  public boolean validateCapture(Move move){
+    if(!super.validateCapture(move)) return false;
+    if(!tryDiagonalCapture(move)) return false;
+    return true;
+  }
   
 }

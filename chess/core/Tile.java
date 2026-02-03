@@ -17,6 +17,10 @@ public class Tile {
     return this.piece;
   }
 
+  public Color getColor() {
+    return this.color;
+  }
+
   public void setPiece(Piece piece) {
     this.piece = piece;
   }

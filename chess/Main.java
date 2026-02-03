@@ -11,17 +11,21 @@ public class Main {
     }
   }
 
+  //public static void main(String[] args) {
+  //  int Rows = 8;
+  //  int Cols = 8;
+//
+  //  int[][] tiles = new int[Rows][Cols];
+  //  for (int row = 0; row < Rows; row++) {
+  //    for (int col = 0; col < Cols; col++) {
+  //      tiles[row][col] = (row + col) % 2 == 0 ? 0 : 1;
+  //    }
+  //  }
+//
+  //  printM(tiles);
+  //}
+
   public static void main(String[] args) {
-    int Rows = 8;
-    int Cols = 8;
-
-    int[][] tiles = new int[Rows][Cols];
-    for (int row = 0; row < Rows; row++) {
-      for (int col = 0; col < Cols; col++) {
-        tiles[row][col] = (row + col) % 2 == 0 ? 0 : 1;
-      }
-    }
-
-    printM(tiles);
+    System.out.println(8%8);
   }
 }
