@@ -10,8 +10,10 @@ import java.awt.GridLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JOptionPane;
 
 import chess.core.Board;
+import chess.core.Color;
 import chess.core.Game;
 import chess.core.PieceType;
 import chess.core.Piece;
@@ -41,12 +43,56 @@ public class BoardPanel extends JPanel {
     }
   }
 
+  private void checkPawnPromotion() {
+    if(chess.core.Game.whitePawnPromotionOnGoing || chess.core.Game.blackPawnPromotionOnGoing) {
+      String promotedPieceType = (String)JOptionPane.showInputDialog(null, "Select promoted piece", "Pawn Promotion", JOptionPane.QUESTION_MESSAGE, null, new String[] {"Bishop", "Rook", "Knight", "Queen"}, "Bishop");
+
+      Color pieceColor = (chess.core.Game.whitePawnPromotionOnGoing ? Color.WHITE : Color.WHITE);
+      PieceType pieceType = (promotedPieceType == "Bishop" ? PieceType.BISHOP : (promotedPieceType == "Knight" ? PieceType.KNIGHT : (promotedPieceType == "Rook" ? PieceType.ROOK : PieceType.QUEEN)));
+      Piece p = new Piece(pieceType, pieceColor);
+      int row = (chess.core.Game.whitePawnPromotionOnGoing ? 0 : Board.LastRow);
+      int col = chess.core.Game.pawnPromotionColumn;
+
+      Piece pawnPromoted = this.game.getBoard().getTile(row, col).getPiece();
+      this.game.removePieceFromArmy(pawnPromoted, pieceColor);
+      this.clearPiece(row, col);
+      this.game.getBoard().getTile(row, col).setPiece(p);
+      this.game.addPieceToArmy(p, pieceColor);
+      this.drawPiece(row, col, pieceType, pieceColor);
+    }
+  }
+
+  private void checkCastling(){
+    if(Game.blackLongCastlingOnGoing) { //optimize
+      this.clearPiece(0, 0);
+      this.drawPiece(0, 3, PieceType.ROOK, Color.BLACK);
+    } else if(Game.blackShortCastlingOnGoing) {
+      this.clearPiece(0, Board.LastCol);
+      this.drawPiece(0, 5, PieceType.ROOK, Color.BLACK );
+    } else if(Game.whiteLongCastlingOnGoing) {
+      this.clearPiece(Board.LastRow, 0);
+      this.drawPiece(Board.LastRow, 3, PieceType.ROOK, Color.WHITE);
+    } else if(Game.whiteShortCastlingOnGoing) {
+      this.clearPiece(Board.LastRow, Board.LastCol);
+      this.drawPiece(Board.LastRow, 5, PieceType.ROOK, Color.WHITE);
+    }
+  }
+
+  private void checkEp() {
+    if(!(Game.epBlackOnGoing || Game.epWhiteOnGoing)) return;
+
+    this.clearPiece((Game.epWhiteOnGoing ? Game.epWhitePawnRow : Game.epBlackPawnRow), (Game.epWhiteOnGoing ? Game.epWhitePawnCol : Game.epBlackPawnCol));
+  }
+
   public void processMove(int sourceRow, int sourceCol, int targetRow, int targetCol){
     boolean moveSuccessful = game.processMove(sourceRow, sourceCol, targetRow, targetCol);
     if(moveSuccessful){
       Piece movedPiece = game.getBoard().getTile(targetRow, targetCol).getPiece();
       this.clearPiece(sourceRow, sourceCol);
       this.drawPiece(targetRow, targetCol, movedPiece.getType(), movedPiece.getColor());
+      this.checkCastling();
+      this.checkPawnPromotion();
+      this.checkEp();
     }
   }
 

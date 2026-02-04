@@ -14,21 +14,46 @@ public class King extends Piece {
     return (rowDiff <= 1 && colDiff <= 1);
   }
   
-  private boolean tryCastling(Move move){
-    //if (!firstMove) {
-    //  return false;
-    //}
-    //int rowDiff = move.getTargetRow() - move.getSourceRow();
-    //int colDiff = move.getTargetCol() - move.getSourceCol();
-    //if (rowDiff != 0) {
-    //  return false;
-    //}
-    //if (Math.abs(colDiff) != 2) {
-    //  return false;
-    //}
-    //// Additional castling validation logic would go here (e.g., checking rook position, path clearance, check conditions)
-    //return true;
+  private boolean tryCastling(Move move){ //improve with check for checks
+    if(!this.firstMove) return false;
 
+    int row = this.color == Color.WHITE ? Board.LastRow : 0;
+
+    if(move.getTargetRow() != (row)) return false;
+
+    if(move.getTargetCol() == 2){
+
+      Piece rook = move.getPiece(row, 0);
+      if(!(rook instanceof Rook && rook != null && rook.getColor() == this.getColor() )) return false;
+
+      boolean obstacleDetected = move.checkPiecePresence(row, 1);
+      obstacleDetected &= move.checkPiecePresence(row, 2);
+      obstacleDetected &= move.checkPiecePresence(row, 3);
+      if(obstacleDetected) return false;
+
+      if(this.getColor() == Color.BLACK) Game.blackLongCastlingOnGoing = true;
+      else Game.whiteLongCastlingOnGoing = true;
+
+      move.setPiece(row, 3, rook);
+      move.setPiece(row, 0, null);
+      return true;
+
+    } else if(move.getTargetCol() == 6){
+      Piece rook = move.getPiece(row, Board.LastCol);
+      if(!(rook instanceof Rook && rook != null && rook.getColor() == this.getColor() )) return false;
+
+      boolean obstacleDetected = move.checkPiecePresence(row, 5);
+      obstacleDetected &= move.checkPiecePresence(row, 6);
+      if(obstacleDetected) return false;
+
+      if(this.getColor() == Color.BLACK) Game.blackShortCastlingOnGoing = true;
+      else Game.whiteShortCastlingOnGoing = true;
+
+      move.setPiece(row, 5, rook);
+      move.setPiece(row, Board.LastCol, null);
+      return true;
+      
+    }
     return false;
   }
 
@@ -42,5 +67,10 @@ public class King extends Piece {
     validMove |= trySingleMove(move);
 
     if (!validMove) throw new InvalidMoveException("invalid move");
+  }
+
+  @Override
+  public void executeMove(Move move){
+    this.firstMove = false;
   }
 }

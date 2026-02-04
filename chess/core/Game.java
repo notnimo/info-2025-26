@@ -7,6 +7,24 @@ public class Game {
   private ArrayList<Piece> whitePieces;
   private ArrayList<Piece> blackPieces;
   private Board board;
+
+  public static boolean blackLongCastlingOnGoing;
+  public static boolean blackShortCastlingOnGoing;
+  public static boolean whiteLongCastlingOnGoing;
+  public static boolean whiteShortCastlingOnGoing;
+
+  public static int pawnPromotionColumn;
+  public static boolean blackPawnPromotionOnGoing;
+  public static boolean whitePawnPromotionOnGoing;
+  
+  public static boolean epLastBlackMove;
+  public static boolean epLastWhiteMove;
+  public static boolean epBlackOnGoing;
+  public static boolean epWhiteOnGoing;
+  public static int epBlackPawnRow;
+  public static int epWhitePawnRow;
+  public static int epBlackPawnCol;
+  public static int epWhitePawnCol;
   
   public Game() {
     this.turn = Color.WHITE;
@@ -16,7 +34,7 @@ public class Game {
     setup();
   }
 
-  private void setup(){
+  public void setup(){
     for(int row = 0; row < Board.Rows; row++){
       if(row == 0 || row == Board.LastRow){
         for(int col = 0; col < Board.Cols; col++){
@@ -40,6 +58,16 @@ public class Game {
           this.board.getTile(row, col).setPiece(new Piece(PieceType.PAWN, (row == 1 ? Color.BLACK : Color.WHITE)));
         }
       }
+    }
+
+    for(int row = 0; row < 2; row++){
+      for(int col = 0; col < Board.Cols; col++)
+        this.blackPieces.add(this.board.getTile(row, col).getPiece());
+    }
+
+    for(int row = 6; row < Board.LastRow; row++){
+      for(int col = 0; col < Board.Cols; col++)
+        this.whitePieces.add(this.board.getTile(row, col).getPiece());
     }
   }
 
@@ -87,8 +115,34 @@ public class Game {
     sourceTile.setPiece(null);
   }
 
+  private void resetCastlingVariables(Move move) {
+    if(this.board.getTile(move.getSourceRow(), move.getSourceCol()).getPiece().getColor() == Color.BLACK){
+      Game.blackLongCastlingOnGoing = false;
+      Game.blackShortCastlingOnGoing = false;
+    } else{
+      Game.whiteLongCastlingOnGoing = false;
+      Game.whiteShortCastlingOnGoing = false;
+    }
+  }
+
+  private void resetPawnPromotionVariables(){
+    Game.blackPawnPromotionOnGoing = false;
+    Game.whitePawnPromotionOnGoing = false;
+  }
+
+  private void resetEpVariables(){
+    Game.epBlackOnGoing = false;
+    Game.epWhiteOnGoing = false;
+
+    Game.epLastBlackMove = this.turn == Color.WHITE;
+    Game.epLastWhiteMove = this.turn == Color.BLACK;
+  }
+
   public boolean processMove(int sourceRow, int sourceCol, int targetRow, int targetCol) {
     Move move = new Move(this.board, sourceRow, sourceCol, targetRow, targetCol);
+    this.resetCastlingVariables(move);
+    this.resetPawnPromotionVariables();
+    this.resetEpVariables(); 
     try{
       validateMove(move);
       move.wouldEndInKingCheck();

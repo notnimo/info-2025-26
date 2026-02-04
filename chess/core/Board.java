@@ -5,8 +5,8 @@ public class Board {
 
   public static final int Rows = 8;
   public static final int Cols = 8;
-  static final int LastRow = Rows - 1;
-  static final int LastCol = Cols - 1;
+  public static final int LastRow = Rows - 1;
+  public static final int LastCol = Cols - 1;
 
   public Board() {
     this.tiles = new Tile[Rows][Cols];
