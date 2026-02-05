@@ -153,8 +153,15 @@ public class BoardPanel extends JPanel {
   }
 
   public void drawPiece(int row, int col, PieceType pieceType, chess.core.Color color){
-    String iconName = "icons/" + color.toString().toUpperCase().charAt(0) + pieceType.toString().toUpperCase().charAt(0) + ".png";
-    URL url = getClass().getClassLoader().getResource(iconName);
+    String iconFile = "" + color.toString().toUpperCase().charAt(0) + pieceType.toString().toUpperCase().charAt(0) + ".png";
+    String iconPath = "/chess/icons/" + iconFile;
+    URL url = getClass().getResource(iconPath);
+    //System.out.println(iconPath);
+    if (url == null) {
+      System.err.println("Resource not found: " + iconPath);
+      JOptionPane.showMessageDialog(this, "Missing icon: " + iconPath, "Resource error", JOptionPane.ERROR_MESSAGE);
+      return;
+    }
     Image image = new ImageIcon(url).getImage();
     image = image.getScaledInstance(TILE_SIZE, TILE_SIZE, Image.SCALE_SMOOTH);
     JLabel label = new JLabel(new ImageIcon(image));
