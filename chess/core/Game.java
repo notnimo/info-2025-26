@@ -39,13 +39,13 @@ public class Game {
       if(row == 0 || row == Board.LastRow){
         for(int col = 0; col < Board.Cols; col++){
           if(col == 0 || col == Board.LastCol)
-            this.board.getTile(row, col).setPiece(new Piece(PieceType.ROOK, (row == 0 ? Color.WHITE : Color.BLACK)));
+            this.board.getTile(row, col).setPiece(new Piece(PieceType.ROOK, (row == 0 ? Color.BLACK : Color.WHITE)));
 
           if(col == 1 || col == (Board.LastCol - 1))
-            this.board.getTile(row, col).setPiece(new Piece(PieceType.KNIGHT, (row == 0 ? Color.WHITE : Color.BLACK)));
+            this.board.getTile(row, col).setPiece(new Piece(PieceType.KNIGHT, (row == 0 ? Color.BLACK : Color.WHITE)));
 
           if(col == 2 || col == (Board.LastCol - 2))
-            this.board.getTile(row, col).setPiece(new Piece(PieceType.BISHOP, (row == 0 ? Color.WHITE : Color.BLACK)));
+            this.board.getTile(row, col).setPiece(new Piece(PieceType.BISHOP, (row == 0 ? Color.BLACK : Color.WHITE)));
 
           if(col == 3) if(row == 0) this.board.getTile(row, col).setPiece(new Piece(PieceType.QUEEN, Color.BLACK));
           else this.board.getTile(row, col).setPiece(new Piece(PieceType.KING, Color.WHITE));

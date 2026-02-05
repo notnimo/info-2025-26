@@ -61,7 +61,7 @@ public class Move {
     for(int row = 0; row < Board.Rows; row++){
       for(int col = 0; col < Board.Cols; col++){
         Piece piece = this.getPiece(row, col);
-        if(piece.getType() == PieceType.KING && piece.getColor() == sourcePiece.getColor()){
+        if(piece != null && piece.getType() == PieceType.KING && piece.getColor() == sourcePiece.getColor()){
           kingRow = row;
           kingCol = col;
         }
