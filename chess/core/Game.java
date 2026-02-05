@@ -139,14 +139,15 @@ public class Game {
   }
 
   public boolean processMove(int sourceRow, int sourceCol, int targetRow, int targetCol) {
+    System.out.println("reached game.processMove");
     Move move = new Move(this.board, sourceRow, sourceCol, targetRow, targetCol);
     this.resetCastlingVariables(move);
     this.resetPawnPromotionVariables();
     this.resetEpVariables(); 
     try{
-      validateMove(move);
+      this.validateMove(move);
       move.wouldEndInKingCheck();
-      executeMove(move);
+      this.executeMove(move);
       this.turn = (this.turn == Color.WHITE) ? Color.BLACK : Color.WHITE;
       return true;
     } catch (InvalidMoveException e) {

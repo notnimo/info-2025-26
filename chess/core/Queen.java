@@ -2,7 +2,7 @@ package chess.core;
 
 public class Queen extends Piece {
     public Queen(Color color) {
-        super(PieceType.QUEEN, color);
+      super(PieceType.QUEEN, color);
     }
 
   @Override

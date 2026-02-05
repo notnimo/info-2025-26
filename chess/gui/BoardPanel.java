@@ -30,15 +30,15 @@ public class BoardPanel extends JPanel {
 
   public void onMove(int row, int col) {
     if(!(this.moveInProgress)){
-      if(game.isMoveSourceValid(row, col)){
+      if(this.game.isMoveSourceValid(row, col)){
         this.moveInProgress = true;
         highlightSourceTile(row, col, java.awt.Color.GREEN);
-        sourceRow = row;
-        sourceCol = col;
+        this.sourceRow = row;
+        this.sourceCol = col;
       }
     }else {
       this.moveInProgress = false;
-      game.processMove(sourceRow, sourceCol, row, col);
+      this.processMove(sourceRow, sourceCol, row, col);
       highlightSourceTile(sourceRow, sourceCol, determineTileColor(sourceRow, sourceCol));
     }
   }
@@ -86,10 +86,12 @@ public class BoardPanel extends JPanel {
 
   public void processMove(int sourceRow, int sourceCol, int targetRow, int targetCol){
     boolean moveSuccessful = game.processMove(sourceRow, sourceCol, targetRow, targetCol);
+    System.out.println("reached boardPanel.processMove");
     if(moveSuccessful){
       Piece movedPiece = game.getBoard().getTile(targetRow, targetCol).getPiece();
       this.clearPiece(sourceRow, sourceCol);
       this.drawPiece(targetRow, targetCol, movedPiece.getType(), movedPiece.getColor());
+      System.out.println("drew piece");
       this.checkCastling();
       this.checkPawnPromotion();
       this.checkEp();
