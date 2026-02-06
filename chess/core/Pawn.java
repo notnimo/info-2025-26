@@ -4,16 +4,18 @@ public class Pawn extends Piece {
 
   private boolean firstMove;
 
-  public Pawn(Color color, boolean firstMove) {
+  public Pawn(Color color) {
     super(PieceType.PAWN, color);
-    this.firstMove = firstMove;
+    this.firstMove = true;
   }
 
   private boolean tryAdvance(Move move, int distance) {
-    int direction = (getColor() == Color.WHITE) ? 1 : -1;
+    int direction = (getColor() == Color.WHITE) ? -1 : 1;
     int expectedRow = move.getSourceRow() + (direction * distance);
 
     move.checkObstacles();
+    if(move.getPiece(move.getTargetRow(), move.getTargetCol()) != null) return false;
+    if(distance == 2 && this.firstMove == false) return false;
 
     return move.getTargetRow() == expectedRow && move.getSourceCol() == move.getTargetCol();
   }
@@ -39,6 +41,7 @@ public class Pawn extends Piece {
     boolean validMoveDetected = tryAdvance(move, 2);
     if (validMoveDetected) {
       this.updateEp(move);
+      this.firstMove = false;
       return;
     }
     validMoveDetected = tryAdvance(move, 1);
@@ -46,6 +49,7 @@ public class Pawn extends Piece {
     validMoveDetected = tryDiagonalCapture(move);
     if (validMoveDetected) return;
 
+    System.out.println("invalid pawn move");
     throw new InvalidMoveException("Invalid move detected");
 
     //super.validateMove(move);

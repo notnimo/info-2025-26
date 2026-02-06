@@ -47,7 +47,7 @@ public class BoardPanel extends JPanel {
     if(chess.core.Game.whitePawnPromotionOnGoing || chess.core.Game.blackPawnPromotionOnGoing) {
       String promotedPieceType = (String)JOptionPane.showInputDialog(null, "Select promoted piece", "Pawn Promotion", JOptionPane.QUESTION_MESSAGE, null, new String[] {"Bishop", "Rook", "Knight", "Queen"}, "Bishop");
 
-      Color pieceColor = (chess.core.Game.whitePawnPromotionOnGoing ? Color.WHITE : Color.WHITE);
+      Color pieceColor = (chess.core.Game.whitePawnPromotionOnGoing ? Color.WHITE : Color.BLACK);
       PieceType pieceType = (promotedPieceType == "Bishop" ? PieceType.BISHOP : (promotedPieceType == "Knight" ? PieceType.KNIGHT : (promotedPieceType == "Rook" ? PieceType.ROOK : PieceType.QUEEN)));
       Piece p = new Piece(pieceType, pieceColor);
       int row = (chess.core.Game.whitePawnPromotionOnGoing ? 0 : Board.LastRow);

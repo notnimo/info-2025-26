@@ -31,6 +31,7 @@ public class Piece {
   }
 
   public void validateMove(Move move) throws InvalidMoveException {
+    System.out.println("piece.validate move invoked");
     if(move.getSourceRow() == move.getTargetRow() && 
     move.getSourceCol() == move.getTargetCol()) throw new InvalidMoveException("Source and target squares are the same.");
 
