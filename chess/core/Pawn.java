@@ -27,58 +27,33 @@ public class Pawn extends Piece {
       Game.epLastWhiteMove = true;
       Game.epWhitePawnRow = move.getTargetRow();
       Game.epWhitePawnCol = move.getTargetCol();
+
+      System.out.println("updating white ep flags, white turn should be over");
     } else {
       Game.epLastBlackMove = true;
       Game.epBlackPawnRow = move.getTargetRow();
       Game.epBlackPawnCol = move.getTargetCol();
+
+      System.out.println("updating black ep flags, black turn should be over");
     }
-  }
-
-  @Override
-  public void validateMove(Move move) throws InvalidMoveException {
-    super.validateMove(move);
-    
-    boolean validMoveDetected = tryAdvance(move, 2);
-    if (validMoveDetected) {
-      this.updateEp(move);
-      this.firstMove = false;
-      return;
-    }
-    validMoveDetected = tryAdvance(move, 1);
-    if (validMoveDetected) return;
-    validMoveDetected = tryDiagonalCapture(move);
-    if (validMoveDetected) return;
-
-    System.out.println("invalid pawn move");
-    throw new InvalidMoveException("Invalid move detected");
-
-    //super.validateMove(move);
-    //if(Math.abs(move.getSourceCol() - move.getTargetCol()) == 2) {
-    //  if(!(firstMove && tryAdvance(move, 2))) throw new InvalidMoveException("invalid move");
-    //  updateEp(move);
-    //} else if(Math.abs(move.getSourceRow() - move.getTargetRow()) == 1) {
-    //  if(move.board.getTile(move.getTargetRow(), move.getTargetCol()).getPiece() != null) throw new InvalidMoveException("invalid move");
-    //  tryAdvance(move, 1);
-    //} else {
-    //  throw new InvalidMoveException("invalid pawn move");
-    //}
   }
 
   private boolean tryEpCapture(Move move) {
+    System.out.println("try ep capture reached");
     boolean enPassantCapture = false;
     Piece capturedPiece = null;
     if (this.color == Color.BLACK && Game.epLastWhiteMove) {
       if (move.getSourceRow() == Game.epWhitePawnRow && Math.abs(move.getSourceCol() - Game.epWhitePawnCol) == 1) {
         Game.epBlackOnGoing = true;
         capturedPiece = move.getPiece(Game.epWhitePawnRow, Game.epWhitePawnCol);
-        move.setPiece(Game.epWhitePawnRow, Game.epWhitePawnCol, null);
+        move.board.getTile(Game.epWhitePawnRow, Game.epWhitePawnCol).setPiece(null);
         enPassantCapture = true;
       }
     } else if (this.color == Color.WHITE && Game.epLastBlackMove) {
       if (move.getSourceRow() == Game.epBlackPawnRow && Math.abs(move.getSourceCol() - Game.epBlackPawnCol) == 1) {
         Game.epWhiteOnGoing = true;
         capturedPiece = move.getPiece(Game.epBlackPawnRow, Game.epBlackPawnCol);
-        move.setPiece(Game.epBlackPawnRow, Game.epBlackPawnCol, null);
+        move.board.getTile(Game.epBlackPawnRow, Game.epBlackPawnCol).setPiece(null);
         enPassantCapture = true;
       }
     } if (enPassantCapture) {
@@ -88,23 +63,24 @@ public class Pawn extends Piece {
   }
 
   private boolean tryDiagonalCapture(Move move) {
+    System.out.println("try diagonal capture reached");
     int colOffset = Math.abs(move.getSourceCol() - move.getTargetCol());
     int rowOffset = Math.abs(move.getTargetRow() - move.getSourceRow());
 
-    if((colOffset != 1 || rowOffset != 1) || move.board.getTile(move.getTargetRow(), move.getTargetCol()).getPiece() == null) return false;
-
-    if((this.getColor() == Color.WHITE ? move.getTargetCol() == Game.epBlackPawnRow : move.getTargetCol() == Game.epWhitePawnRow))
+    if((this.getColor() == Color.WHITE ? move.getTargetCol() == Game.epBlackPawnCol : move.getTargetCol() == Game.epWhitePawnCol))
       if(tryEpCapture(move)) return true;
+
+    if((colOffset != 1 || rowOffset != 1) || move.board.getTile(move.getTargetRow(), move.getTargetCol()).getPiece() == null) return false;
 
     return true;
   }
 
-  @Override
+  /*@Override
   public boolean validateCapture(Move move){
     if(!super.validateCapture(move)) return false;
     if(!tryDiagonalCapture(move)) return false;
     return true;
-  }
+  }*/
 
   @Override
   public void executeMove(Move move){
@@ -123,4 +99,22 @@ public class Pawn extends Piece {
   }
 
 
+  @Override
+  public void validateMove(Move move) throws InvalidMoveException {
+    super.validateMove(move);
+    
+    boolean validMoveDetected = tryAdvance(move, 2);
+    if (validMoveDetected) {
+      this.updateEp(move);
+      this.firstMove = false;
+      return;
+    }
+    validMoveDetected = tryAdvance(move, 1);
+    if (validMoveDetected) return;
+    validMoveDetected = tryDiagonalCapture(move);
+    if (validMoveDetected) return;
+
+    System.out.println("invalid pawn move");
+    throw new InvalidMoveException("Invalid move detected");
+  }
 }

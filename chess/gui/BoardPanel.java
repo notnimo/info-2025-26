@@ -81,7 +81,7 @@ public class BoardPanel extends JPanel {
   private void checkEp() {
     if(!(Game.epBlackOnGoing || Game.epWhiteOnGoing)) return;
 
-    this.clearPiece((Game.epWhiteOnGoing ? Game.epWhitePawnRow : Game.epBlackPawnRow), (Game.epWhiteOnGoing ? Game.epWhitePawnCol : Game.epBlackPawnCol));
+    this.clearPiece((Game.epWhiteOnGoing ? Game.epBlackPawnRow : Game.epWhitePawnRow), (Game.epWhiteOnGoing ? Game.epBlackPawnCol : Game.epWhitePawnCol));
   }
 
   public void processMove(int sourceRow, int sourceCol, int targetRow, int targetCol){
