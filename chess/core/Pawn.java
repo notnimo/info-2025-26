@@ -27,19 +27,14 @@ public class Pawn extends Piece {
       Game.epLastWhiteMove = true;
       Game.epWhitePawnRow = move.getTargetRow();
       Game.epWhitePawnCol = move.getTargetCol();
-
-      System.out.println("updating white ep flags, white turn should be over");
     } else {
       Game.epLastBlackMove = true;
       Game.epBlackPawnRow = move.getTargetRow();
       Game.epBlackPawnCol = move.getTargetCol();
-
-      System.out.println("updating black ep flags, black turn should be over");
     }
   }
 
   private boolean tryEpCapture(Move move) {
-    System.out.println("try ep capture reached");
     boolean enPassantCapture = false;
     Piece capturedPiece = null;
     if (this.color == Color.BLACK && Game.epLastWhiteMove) {
@@ -63,7 +58,6 @@ public class Pawn extends Piece {
   }
 
   private boolean tryDiagonalCapture(Move move) {
-    System.out.println("try diagonal capture reached");
     int colOffset = Math.abs(move.getSourceCol() - move.getTargetCol());
     int rowOffset = Math.abs(move.getTargetRow() - move.getSourceRow());
 
@@ -114,7 +108,6 @@ public class Pawn extends Piece {
     validMoveDetected = tryDiagonalCapture(move);
     if (validMoveDetected) return;
 
-    System.out.println("invalid pawn move");
     throw new InvalidMoveException("Invalid move detected");
   }
 }

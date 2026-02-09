@@ -17,9 +17,6 @@ public class Bishop extends Piece {
 
     int rowDiff = Math.abs(endRow - startRow);
     int colDiff = Math.abs(endCol - startCol);
-
-    System.out.println("startRow: " + startRow + " startCol: " +startCol+ " endRow: " +endRow+ " endCol: "+ endCol);
-    System.out.println((rowDiff == colDiff));
     return (rowDiff == colDiff);
   }
 
@@ -28,7 +25,6 @@ public class Bishop extends Piece {
     super.validateMove(move);
 
     boolean validMove = diagonalMove(move) && !move.checkObstacles();
-    System.out.println("bishop validated move: " + validMove);
     if (!validMove) throw new InvalidMoveException("invalid move");
   }
   

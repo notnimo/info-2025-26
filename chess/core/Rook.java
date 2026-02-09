@@ -11,9 +11,6 @@ public class Rook extends Piece{
     int startCol = move.getSourceCol();
     int endRow = move.getTargetRow();
     int endCol = move.getTargetCol();
-
-    System.out.println("startRow: " + startRow + " startCol: " +startCol+ " endRow: " +endRow+ " endCol: "+ endCol);
-    System.out.println((startRow == endRow || startCol == endCol) && !move.checkObstacles());
     return (startRow == endRow || startCol == endCol) && !move.checkObstacles();
   }
 
@@ -22,7 +19,6 @@ public class Rook extends Piece{
     super.validateMove(move);
 
     boolean validMove = orthogonalMove(move);
-    System.out.println("rook validated move: " + validMove);
     if (!validMove) throw new InvalidMoveException("invalid move");
   }
 }

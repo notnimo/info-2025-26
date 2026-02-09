@@ -48,10 +48,10 @@ public class Game {
             this.board.getTile(row, col).setPiece(new Bishop((row == 0 ? Color.BLACK : Color.WHITE)));
 
           if(col == 3) if(row == 0) this.board.getTile(row, col).setPiece(new Queen(Color.BLACK));
-          else this.board.getTile(row, col).setPiece(new King(Color.WHITE));
+          else this.board.getTile(row, col).setPiece(new Queen(Color.WHITE));
 
           if(col == 4) if(row == 0) this.board.getTile(row, col).setPiece(new King(Color.BLACK));
-          else this.board.getTile(row, col).setPiece(new Queen(Color.WHITE));
+          else this.board.getTile(row, col).setPiece(new King(Color.WHITE));
         }
       }else if(row == 1 || row == (Board.LastRow - 1)){
         for(int col = 0; col < Board.Cols; col++){
@@ -99,7 +99,6 @@ public class Game {
 
   public void validateMove(Move move) throws InvalidMoveException {
       Piece piece = board.getTile(move.getSourceRow(), move.getSourceCol()).getPiece();
-      System.out.println("piece got in game.java: " + piece.getClass());
       piece.validateMove(move);
   }
 

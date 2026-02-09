@@ -68,11 +68,15 @@ public class Move {
       }
     }
 
+    boolean kingInCheck = this.isKingInCheck(kingRow, kingCol, sourcePiece.getColor());
+    if (kingInCheck) {
+      this.setPiece(this.sourceRow, this.sourceCol, sourcePiece);
+      this.setPiece(this.targetRow, this.targetCol, targetPiece);
+      throw new InvalidMoveException("Move would put or leave king in check");
+    }
+
     this.setPiece(this.sourceRow, this.sourceCol, sourcePiece);
     this.setPiece(this.targetRow, this.targetCol, targetPiece);
-
-    boolean kingInCheck = this.isKingInCheck(kingRow, kingCol, sourcePiece.getColor());
-    if (kingInCheck) throw new InvalidMoveException("Move would put or leave king in check");
   }
 
   public boolean isTargetOccupiedByAlly(){
@@ -89,13 +93,14 @@ public class Move {
     for (int row = 0; row < Board.Rows; row++) {
       for (int col = 0; col < Board.Cols; col++) {
         Piece piece = this.getPiece(row, col);
-        if (piece != null && opponentColor == kingColor) {
+        if (piece != null && opponentColor == piece.getColor() && piece.getType() != PieceType.KING) {
           Move potentialMove = new Move(this.board, row, col, kingRow, kingCol);
           try{
             piece.validateMove(potentialMove);
           }catch(InvalidMoveException e){
-            return true;
+            continue;
           }
+          return true;
         }
       }
     }
