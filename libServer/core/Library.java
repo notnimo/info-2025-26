@@ -43,7 +43,58 @@ public class Library {
     return results;
   }
 
-  public String getBooksByAuthor(String authorName) {}
+  public String getBooksByAuthor(String authorName) {
+    ArrayList<Book> matchingBooks = new ArrayList<Book>();
+    Author author = new Author(authorName);
+    for (Book book : books) {
+      if (book.doesAuthorMatch(author)) {
+        matchingBooks.add(book);
+      }
+    }
+    return formatResults(matchingBooks);
+  }
+
+  public String getBooksByTitle(String title) {
+    ArrayList<Book> matchingBooks = new ArrayList<Book>();
+    for (Book book : books) {
+      if (book.doesTitleMatch(title)) {
+        matchingBooks.add(book);
+      }
+    }
+    return formatResults(matchingBooks);
+  }
+
+  public String getBooksByPublisher(String publisherName) {
+    ArrayList<Book> matchingBooks = new ArrayList<Book>();
+    Publisher publisher = new Publisher(publisherName);
+    for (Book book : books) {
+      if (book.doesPublisherMatch(publisher)) {
+        matchingBooks.add(book);
+      }
+    }
+    return formatResults(matchingBooks);
+  }
+
+  public String getBooksByISBN(String isbn) {
+    ArrayList<Book> matchingBooks = new ArrayList<Book>();
+    ISBN bookISBN = new ISBN(isbn);
+    for (Book book : books) {
+      if (book.doesISBNMatch(bookISBN)) {
+        matchingBooks.add(book);
+      }
+    }
+    return formatResults(matchingBooks);
+  }
+
+  public String getBooksByYear(int year) {
+    ArrayList<Book> matchingBooks = new ArrayList<Book>();
+    for (Book book : books) {
+      if (book.doesYearMatch(year)) {
+        matchingBooks.add(book);
+      }
+    }
+    return formatResults(matchingBooks);
+  }
 
   public Library() throws FileNotFoundException {
     this.books = new ArrayList<Book>();
