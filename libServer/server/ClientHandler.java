@@ -1,3 +1,5 @@
+package libServer.server;
+
 public class ClientHandler extends Thread {
   private final Socket socket;
   private final Library library;

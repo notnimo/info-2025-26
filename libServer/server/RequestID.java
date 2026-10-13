@@ -1,3 +1,5 @@
+package libServer.server;
+
 public enum RequestID {
   BYE,
   AUTHOR,

@@ -1,3 +1,5 @@
+package libServer.server;
+
 public class Server {
   private final Library library;
   private final int port = 1234;
