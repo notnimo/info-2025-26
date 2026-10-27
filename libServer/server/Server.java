@@ -1,5 +1,11 @@
 package libServer.server;
 
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+import libServer.core.Library;
+
 public class Server {
   private final Library library;
   private final int port = 1234;

@@ -1,21 +1,47 @@
 package libServer.core;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
-
-import libServer.core.Books;
+import java.util.Arrays;
+import java.util.List;
+import java.util.ListIterator;
 
 public class Library {
   private final ArrayList<Book> books;
 
-  private void loadDataset() throws FileNotFoundException {
+  private void loadDataset() throws IOException {
+    Path dataset = null;
+    Path[] datasetLocations = {
+      Paths.get("books.csv"),
+      Paths.get("libServer", "core", "books.csv"),
+      Paths.get("core", "books.csv")
+    };
+    for (Path location : datasetLocations) {
+      if (Files.isRegularFile(location)) {
+        dataset = location;
+        break;
+      }
+    }
+    if (dataset == null) {
+      throw new FileNotFoundException("Could not find books.csv. Searched: " + datasetLocations[0]
+          + ", " + datasetLocations[1] + ", " + datasetLocations[2]);
+    }
+
     String COMMA_DELIMITER = ",";
     List<List<String>> records = new ArrayList<>();
-    BufferedReader br = new BufferedReader(new FileReader("./../books.csv"));
     String line;
 
-    while ((line = br.readLine()) != null) {
-      String[] values = line.split(COMMA_DELIMITER);
-      records.add(Arrays.asList(values));
+    try (BufferedReader br = new BufferedReader(new FileReader(dataset.toFile()))) {
+      while ((line = br.readLine()) != null) {
+        String[] values = line.split(COMMA_DELIMITER);
+        records.add(Arrays.asList(values));
+      }
     }
 
     ListIterator<List<String>> recordsIter = records.listIterator();
@@ -96,7 +122,7 @@ public class Library {
     return formatResults(matchingBooks);
   }
 
-  public Library() throws FileNotFoundException {
+  public Library() throws IOException {
     this.books = new ArrayList<Book>();
     loadDataset();
   }
